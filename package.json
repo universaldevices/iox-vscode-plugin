@@ -4,7 +4,7 @@
   "description": "Define your plugin in JSON and let this extension take care of the rest",
   "publisher": "UniversalDevices",
   "icon": "images/icon.png",
-  "repository": "github.com/universaldevices/iox-vscode-plugin",
+  "repository": "https://github.com/universaldevices/iox-vscode-plugin",
   "version": "1.3.0",
   "engines": {
     "vscode": "^1.85.1"
