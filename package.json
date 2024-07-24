@@ -30,14 +30,6 @@
         }
       ]
     },
-    "activationEvents": [
-      "onView:ioxPluginSidebar",
-      "onCommand:iox-plugin-ext.createProject",
-      "OnCommand:iox-plugin-ext.createJSON",
-      "OnCommand:iox-plugin-ext.generatePluginCode",
-      "OnCommand:iox-plugin-ext.addToStore",
-      "OnCommand:iox-plugin-ext.installOnIoX"
-    ],
     "jsonValidation": [
       {
         "fileMatch": "*.iox_plugin.json",
