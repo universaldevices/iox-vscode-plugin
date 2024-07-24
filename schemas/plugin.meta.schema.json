@@ -1,0 +1,162 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type":"object",
+    "description": "This object defines the metadata for your plugin. This information is used to create local store entry.",
+    "properties":
+    {
+          "name":{
+            "type":"string",
+            "description":"Give your plugin a name!",
+            "propertyOrder":1
+          },
+          "description":{
+            "type":"string",
+            "description":"Give your plugin a nice description!",
+            "propertyOrder":2
+          },
+          "publisher":{
+            "type":"string",
+            "description": "Provide the company/develper/publisher name as vetted an authorized by UD.",
+            "propertyOrder":3
+          },
+          "language":{
+            "type":"string",
+            "oneOf": [
+                {
+                    "enum":["python3"],
+                    "description": "Python"
+                }
+            ],
+            "default":"python3",
+            "propertyOrder":5
+          },
+          "executableName":{
+            "type":"string",
+            "description": "The name of your executable such as plugin.py",
+            "propertyOrder":6
+          },
+          "installScript":{
+            "type":"string",
+            "default":"install.sh",
+            "description": "The installation script. If none, default (install.sh) will be used.",
+            "propertyOrder":7
+          },
+          "documentationLink":{
+            "type":"string",
+            "description": "Link to the documentation for this plugin"
+          },
+          "licenseLink":{
+            "type":"string",
+            "description": "Link to the license for this plugin"
+          },
+          "shortPoll":{
+            "type":"integer",
+            "default":60,
+            "description": "Initial short poll interval in seconds",
+            "propertyOrder":7
+          },
+          "longPoll":{
+            "type":"integer",
+            "default":600,
+            "description": "Initial long poll interval in seconds",
+            "propertyOrder":8
+          },
+          "profileVersion":{
+            "type":"string",
+            "description": "The Polyglot profile version. Such as 3.0.0 (default)",
+            "default":"3.0.0",
+            "oneOf": [
+                {
+                    "enum" :["3.0.0"]
+                }
+            ],
+            "propertyOrder":9
+          },
+          "initialLogLevel":{
+            "type": "string",
+            "description": "The log level when the plugin starts",
+            "oneOf":[
+                {
+                    "enum": ["CRITICAL"]
+                },
+                {
+                    "enum": ["ERROR"]
+                },
+                {
+                    "enum": ["WARNING"]
+                },
+                {
+                    "enum": ["INFO"]
+                },
+                {
+                    "enum": ["DEBUG"]
+                }
+            ],
+            "default": "INFO"
+          },
+          "status":{
+            "type":"string",
+            "description": "What's should be or is the status of this plugin in the store",
+            "oneOf":[
+              {
+                "enum": ["New"],
+                "description": "Needs vetting"
+              },
+              {
+                "enum": ["Active"],
+                "description": "Needs vetting"
+              },
+              {
+                "enum": ["Inactive"],
+                "description": "Not supported / listed"
+              }
+            ],
+            "default": "Active"
+          },
+          "enableOAUTH2":{
+            "type":"boolean",
+            "default":false,
+            "description": "Enable the plugin to handle OAUTH 2 authentication. If you enabled this feature, you must also provide OAuth Configuration parameters on the store entry (not safe in this file)"
+          },
+          "worksOnPolisy":{
+            "type":"boolean",
+            "default":false,
+            "description": "Whether or not this plugin works on Polisy"
+          },
+          "worksOnEisy":{
+            "type":"boolean",
+            "default":true,
+            "description": "Whether or not this plugin works on Polisy"
+          },
+          "requiresIoXAccess":{
+            "type":"boolean",
+            "default":false,
+            "description": "Whether or not this plugin can directly communiate with IoX. If you choose true, the customer must explicitly accept"
+          },
+          "enableFileUpload":{
+            "type":"boolean",
+            "default":false,
+            "description": "Whether or not this plugin can directly communiate with IoX. If you choose true, the customer must explicitly accept"
+          },
+          "requirements":{
+            "type":"array",
+            "description": "pip packages to be installed. udi_interface and ioxplugin are installed by default.",
+            "items":
+            {
+              "type":"string"
+            }
+          },
+          "nodesAreStatic":{
+            "type":"boolean",
+            "description":"Whehter or not nodes are statically created from the node definitions or the protocol handler dynamically creates them after discovery.",
+            "default":true
+          },
+          "version":{
+            "type":"string",
+            "description": "The version that's displayed to the user and then installed in iox",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+    },
+    "required": ["name", "executableName", "description", "publisher", "language","installScript","documentationLink", "licenseLink", "requirements", "version"]
+  }
+   

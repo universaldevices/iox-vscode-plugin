@@ -1,0 +1,80 @@
+{
+    "plugin": {
+          "name":"sensors",
+          "description":"A Multisensor",
+          "publisher":"UD",
+          "language": "python3",
+          "executableName":"sensors.py",
+          "installScript":"install.sh",
+          "documentationLink":"docs",
+          "licenseLink":"lic",
+          "shortPoll":60,
+          "longPoll":600,
+          "profileVersion":"3.0.0",
+          "initialLogLevel":"INFO",
+          "enableOAUTH2":false,
+          "worksOnPolisy":true,
+          "worksOnEisy":true,
+          "requiresIoXAccess": false,
+          "enableFileUpload": false,
+          "requirements": [],
+          "version": "1.0.0"
+    },
+    "editors": [
+        {
+            "id": "humidity",
+            "min": 0,
+            "max": 100,
+            "uom": "Absolute humidity | 21"
+        },
+        {
+            "id": "temp",
+            "min": 30,
+            "max": 120,
+            "uom": "Fahrenheit | 17"
+        },
+        {
+            "id": "lum",
+            "min": 0,
+            "max": 100,
+            "uom": "Percent | 51"
+        }
+    ],
+    "nodedefs": [
+        {
+            "id":"sensors",
+            "name":"Sensors",
+            "icon":"MotionSensor",
+            "properties": [
+                {
+                    "id":"CLIHUM",
+                    "name": "Humidity",
+                    "editor": {
+                        "idref": "humidity"
+                    },
+                    "is_settable": false
+                },
+                {
+                    "id": "CLITEMP",
+                    "name": "Temperature",
+                    "editor": {
+                        "idref": "temp"
+                    } ,
+                    "is_settable": false
+                },
+                {
+                    "id": "LUMIN",
+                    "name": "Luminance",
+                    "editor": {
+                        "idref": "lum"
+                    } ,
+                    "is_settable": false
+                }
+            ],
+            "commands": {
+                "accepts": [],
+                "sends": []
+            } 
+        }
+    ]
+}

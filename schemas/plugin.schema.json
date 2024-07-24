@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type":"object",
+  "description": "This object defines all aspects of your plugin. Each plugin has many nodes that it handles.",
+  "properties":
+  {
+        "plugin":{
+          "type":"object",
+          "$ref":"plugin.meta.schema.json",
+          "propertyOrder":1
+        },
+        "protocol":{
+          "type":"object",
+          "$ref":"protocol.schema.json"
+        },
+        "editors":{
+          "type":"array",
+          "description":"Optionally, define editors that may be used globally across all your nodes.",
+          "items":{
+            "type":"object",
+            "$ref":"editor.schema.json"
+          },
+          "propertyOrder":2
+        },
+        "nodedefs":{
+          "type": "array",
+          "description":"An array of node definitions",
+          "items":{
+              "type":"object"
+          },
+          "propertyOrder":3
+        }
+  },
+  "if":{
+        "properties":{
+              "protocol":{
+                  "properties":{
+                    "name":{
+                          "const":"Modbus"
+                    }
+                  }
+              }
+        }
+  },
+  "then":{
+        "properties":{
+          "nodedefs":{
+            "items": {
+              "type":"object",
+              "$ref":"modbus.node.schema.json"
+            }
+          }
+        }
+  },"else":
+  {
+        "properties":{
+          "nodedefs":{
+            "items": {
+              "type":"object",
+              "$ref":"node.schema.json"
+            }
+          }
+        }
+  },
+  "required":["nodedefs"],
+  "additionalProperties": false
+}
+ 

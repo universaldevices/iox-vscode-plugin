@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "TCP Endpoint Parameters",
+  "properties": {
+    "mode":{
+      "type":"string",
+      "const":"TCP",
+      "propertyOrder":1
+    },
+    "host": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "ipv4",
+          "description": "The IPv4 address of the TCP endpoint"
+        },
+        {
+          "type": "string",
+          "format": "ipv6",
+          "description": "The IPv6 address of the TCP endpoint"
+        },
+        {
+          "type": "string",
+          "format": "hostname",
+          "description": "The hostname or URL of the TCP endpoint"
+        }
+      ],
+      "propertyOrder":2
+    },
+    "port": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535,
+      "description": "The port number of the TCP endpoint",
+      "propertyOrder":3
+    },
+    "timeout": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The timeout value in seconds for establishing a connection"
+    },
+    "keepAlive": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable TCP keep-alive"
+    }
+  },
+  "required": ["host", "port"]
+}

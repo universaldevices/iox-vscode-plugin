@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description":"Definition of a node of any sort",
+  "allOf":
+  [
+       {
+          "type":"object",
+          "$ref":"common.node.schema.json"
+       },
+       {
+          "type":"object",
+          "properties":{
+              "properties": {
+                  "type": "array",
+                  "$ref": "node.properties.schema.json"
+            }
+          },
+          "required":["properties"]
+       }
+  ]
+}
+ 

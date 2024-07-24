@@ -1,0 +1,143 @@
+{
+  "name": "iox-plugin-ext",
+  "displayName": "IoX Plugin Developer",
+  "description": "Define your plugin in JSON and let this extension take care of the rest",
+  "publisher": "UniversalDevices",
+  "icon": "images/icon.png",
+  "version": "1.2.0",
+  "engines": {
+    "vscode": "^1.85.1"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+          {
+              "id": "ioxPluginContainer",
+              "title": "IoX Plugin Developer",
+              "icon": "images/icon.png"
+          }
+      ]
+    },
+    "views": {
+      "ioxPluginContainer": [
+          {
+              "id": "ioxPluginSidebar",
+              "name": "Command Panel"
+          }
+      ]
+    },
+    "activationEvents": [
+      "onView:ioxPluginSidebar"
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "*.iox_plugin.json",
+        "url": "./schemas/plugin.schema.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "iox-plugin-ext.createProject",
+        "title": "1. Create IoX Plugin Project",
+        "icon": "add.svg"
+      },
+      {
+        "command": "iox-plugin-ext.createJSON",
+        "title": "2. Create IoX Plugin JSON File" ,
+        "icon": "json.svg"
+      },
+      {
+        "command": "iox-plugin-ext.generatePluginCode",
+        "title": "3. Generate IoX Plugin Code",
+        "icon": "file-code.svg"
+      },
+      {
+        "command": "iox-plugin-ext.addToStore",
+        "title": "4. Add to local plugin store",
+        "icon":"repo-push.svg"
+      },
+      {
+        "command": "iox-plugin-ext.installOnIoX",
+        "title": "5. Install on IoX",
+        "icon":"folder-active.svg"
+      },
+      {
+        "command": "iox-plugin-ext.runInIoX",
+        "title": "6. Run in IoX",
+        "icon":"run-above.svg"
+      },
+      {
+        "command": "iox-plugin-ext.packageAndPublish",
+        "title": "7. Package and Publish",
+        "icon":"package.svg"
+      },
+      {
+        "command": "iox-plugin-ext.generateHelp",
+        "title": "Help",
+        "icon":"question.svg"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "iox-plugin-ext.createProject",
+          "when": "true"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "resourceFilename =~ /\\.iox_plugin\\.json$/",
+          "command": "iox-plugin-ext.generatePluginCode",
+          "group": "navigation",
+          "arguments": [
+            {
+                "uri": "${selectedFile}"
+            }
+          ]
+        }
+      ]
+    },
+    "snippets": [
+      {
+        "language": "json",
+        "path": "./snippets/none.iox_plugin.json",
+        "description": "From scratch"
+      },
+      {
+        "language": "json",
+        "path": "./snippets/tstat.iox_plugin.json",
+        "description": "Sample thermostat"
+      },
+      {
+        "language": "json",
+        "path": "./snippets/dimmer.iox_plugin.json",
+        "description": "Sample dimmer"
+      },
+      {
+        "language": "json",
+        "path": "./snippets/sensors.iox_plugin.json",
+        "description": "Sample sensors"
+      },
+      {
+        "language": "json",
+        "path": "./snippets/modbus.iox_plugin.json",
+        "description": "Sample modbus"
+      }
+    ]
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "minimist": ">=0.2.4",
+    "minimatch": ">=3.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "minimist": ">=0.2.4",
+    "minimatch": ">=3.0.5"
+  },
+  "main": "./extensions/compiled/extension.js"
+}

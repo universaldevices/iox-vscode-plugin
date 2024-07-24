@@ -1,0 +1,129 @@
+{
+    "plugin": {
+          "name":"tstat",
+          "description":"A Thermostat",
+          "author":"UD",
+          "language": 0,
+          "executableName":"tstat.py",
+          "installScript":"install.sh",
+          "documentationLink":"docs",
+          "licenseLink":"lic",
+          "shortPoll":60,
+          "longPoll":600,
+          "profileVersion":"3.0.0",
+          "initialLogLevel":3,
+          "enableDiscovery":true,
+          "enableOAUTH2":false,
+          "worksOnPolisy":true,
+          "worksOnEisy":true,
+          "requiresIoXAccess": false,
+          "requirements": [],
+          "version": "1.0.0"
+    },
+    "editors": [
+        {
+            "id": "mode",
+            "uom": "Thermostat mode | 67",
+            "min": 0,
+            "max": 7,
+            "index_names": [
+                "Auto | 3",
+                "Cool | 2",
+                "Heat | 1",
+                "Furnace | 7",
+                "Off | 0"
+            ]
+        },
+        {
+            "id": "temp",
+            "min": 30,
+            "max": 120,
+            "uom": "Fahrenheit | 17"
+        },
+        {
+            "id": "fan",
+            "uom": "Thermostat fan run state | 80",
+            "min": 3,
+            "max": 8,
+            "index_names": [
+                "Circulation | 4",
+                "Quiet Circulation | 8",
+                "On Medium | 3",
+                "Right/Left Circulation | 6"
+            ]
+        },
+        {
+            "id": "fanmode",
+            "uom": "Thermostat fan mode | 68",
+            "min": 1,
+            "max": 10,
+            "index_names": [
+                "Auto High | 2",
+                "Humidity Circulation | 7",
+                "On | 1",
+                "Quiet | 10"
+            ]
+        }
+    ],
+    "nodedefs": [
+        {
+            "id":"tstat",
+            "name":"Thermostat",
+            "icon":"Thermostat",
+            "properties": [
+                {
+                    "id":"ST",
+                    "name": "Temperature",
+                    "editor": {
+                        "idref": "temp"
+                    },
+                    "is_settable": false
+                },
+                {
+                    "id":"CLISPC",
+                    "name": "Cool Setpoint",
+                    "editor": {
+                        "idref": "temp"
+                    },
+                    "is_settable": true
+                },
+                {
+                    "id":"CLISPH",
+                    "name": "Heat Setpoint",
+                    "editor": {
+                        "idref": "temp"
+                    },
+                    "is_settable": true
+                },
+                {
+                    "id": "CLIMD",
+                    "name": "Mode",
+                    "editor": {
+                        "idref": "mode"
+                    } ,
+                    "is_settable": true
+                },
+                {
+                    "id": "CLIFRS",
+                    "name": "Fan Running State",
+                    "editor": {
+                        "idref": "fan"
+                    } ,
+                    "is_settable": false
+                },
+                {
+                    "id": "CLIFS",
+                    "name": "Fan Mode",
+                    "editor": {
+                        "idref": "fan"
+                    } ,
+                    "is_settable": true
+                }
+            ],
+            "commands": {
+                "accepts": [],
+                "sends": []
+            } 
+        }
+    ]
+}

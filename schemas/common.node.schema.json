@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type":"object",
+  "description": "This object defines the common properties for a node",
+  "properties":{ 
+        "id": {
+          "type": "string",
+          "pattern": "^[^\\s]+$",
+          "description": "The id used to identify this node!",
+          "propertyOrder":1
+        },
+        "name": {
+          "type": "string",
+          "description": "The human readable name. If you have NLS files, this name will be translated",
+          "propertyOrder":2
+        },
+        "parent": {
+          "type": "string",
+          "description": "If you have a controller / child relationship, parent is the id of the controller node",
+          "propertyOrder":3
+        },
+        "icon":{
+          "type": "string",
+          "$ref": "icon.schema.json",
+          "propertyOrder":4
+        },
+        "commands": {
+          "$ref": "commands.schema.json",
+          "propertyOrder":6
+        }
+      },
+      "required": ["id", "name","commands"]
+}
+ 

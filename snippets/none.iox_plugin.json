@@ -1,0 +1,51 @@
+{
+    "plugin": {
+          "name":"firstplugin",
+          "description":"My First Plugin",
+          "publisher":"Me",
+          "language": "python3",
+          "executableName":"plugin.py",
+          "installScript":"install.sh",
+          "documentationLink":"docs",
+          "licenseLink":"license",
+          "shortPoll":60,
+          "longPoll":600,
+          "profileVersion":"3.0.0",
+          "initialLogLevel":"INFO",
+          "enableOAUTH2":false,
+          "worksOnPolisy":true,
+          "worksOnEisy":true,
+          "requiresIoXAccess": false,
+          "requirements": [],
+          "version": "1.0.0"
+    },
+    "editors": [
+        {
+            "id": "status",
+            "min": 0,
+            "max": 1,
+            "uom": "Boolean | 2"
+        }
+    ],
+    "nodedefs": [
+        {
+            "id":"firstnode",
+            "name":"First Node",
+            "icon":"GenericRspCtl",
+            "properties": [
+                {
+                    "id":"ST", 
+                    "name": "Status",
+                    "editor": {
+                        "idref": "status"
+                    },
+                    "is_settable": false
+                }
+            ],
+            "commands": {
+                "accepts": [ ],
+                "sends": [ ]
+            } 
+        }
+    ]
+}

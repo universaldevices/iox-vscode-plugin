@@ -1,0 +1,38 @@
+Need to create the following files:
+
+version
+requirements.txt
+dev.init.sh
+install.sh
+POLYGLOT_CONFIG.md
+tar.it
+
+if __name__ == "__main__":
+    try:
+        polyglot = udi_interface.Interface([])
+        polyglot.start('1.0.4')
+        PluginMain(polyglot)
+        polyglot.runForever()
+    except (KeyboardInterrupt, SystemExit):
+        LOGGER.info("exiting ..." )
+        sys.exit(0)
+
+
+In FreeBSD, you need to change extensionsGallery to point to visualstudio.com:
+/usr/local/share/code-oss/resources/app/product.json
+
+        "extensionsGallery": {
+                "serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
+                "cacheUrl": "https://vscode.blob.core.windows.net/gallery/index",
+                "itemUrl": "https://marketplace.visualstudio.com/items"
+        },
+
+For open-vsx:
+        "extensionsGallery": {
+                "serviceUrl": "https://open-vsx.org/vscode/gallery",
+                "itemUrl": "https://open-vsx.org/vscode/item"
+        },
+
+
+tsc
+vsce publish 
