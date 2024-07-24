@@ -1,26 +1,13 @@
-name: Release
-on:
-  release:
-    types:
-      - published
-  workflow_dispatch:
-    inputs:
-      publishMS:
-        description: "Publish to the Microsoft Marketplace"
-        type: boolean
-        required: true
-        default: "true"
-      publishOVSX:
-        description: "Publish to Open VSX"
-        type: boolean
-        required: true
-        default: "true"
-      publishGH:
-        description: "Publish to GitHub Releases"
-        type: boolean
-        required: true
-        default: "true"
+name: Publish VSX/VSCE
 
+on:
+    release:
+      types: [published]
+
+permissions:
+  contents: read
+
+  
 jobs:
   package:
     name: Package
