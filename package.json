@@ -15,19 +15,19 @@
   "contributes": {
     "viewsContainers": {
       "activitybar": [
-          {
-              "id": "ioxPluginContainer",
-              "title": "IoX Plugin Developer",
-              "icon": "images/icon.png"
-          }
+        {
+          "id": "ioxPluginContainer",
+          "title": "IoX Plugin Developer",
+          "icon": "images/icon.png"
+        }
       ]
     },
     "views": {
       "ioxPluginContainer": [
-          {
-              "id": "ioxPluginSidebar",
-              "name": "Command Panel"
-          }
+        {
+          "id": "ioxPluginSidebar",
+          "name": "Command Panel"
+        }
       ]
     },
     "activationEvents": [
@@ -47,7 +47,7 @@
       },
       {
         "command": "iox-plugin-ext.createJSON",
-        "title": "2. Create IoX Plugin JSON File" ,
+        "title": "2. Create IoX Plugin JSON File",
         "icon": "json.svg"
       },
       {
@@ -58,27 +58,27 @@
       {
         "command": "iox-plugin-ext.addToStore",
         "title": "4. Add to local plugin store",
-        "icon":"repo-push.svg"
+        "icon": "repo-push.svg"
       },
       {
         "command": "iox-plugin-ext.installOnIoX",
         "title": "5. Install on IoX",
-        "icon":"folder-active.svg"
+        "icon": "folder-active.svg"
       },
       {
         "command": "iox-plugin-ext.runInIoX",
         "title": "6. Run in IoX",
-        "icon":"run-above.svg"
+        "icon": "run-above.svg"
       },
       {
         "command": "iox-plugin-ext.packageAndPublish",
         "title": "7. Package and Publish",
-        "icon":"package.svg"
+        "icon": "package.svg"
       },
       {
         "command": "iox-plugin-ext.generateHelp",
         "title": "Help",
-        "icon":"question.svg"
+        "icon": "question.svg"
       }
     ],
     "menus": {
@@ -95,7 +95,7 @@
           "group": "navigation",
           "arguments": [
             {
-                "uri": "${selectedFile}"
+              "uri": "${selectedFile}"
             }
           ]
         }
@@ -131,14 +131,15 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
-    "path": "^0.12.7",
+    "minimatch": ">=3.0.5",
     "minimist": ">=0.2.5",
-    "minimatch": ">=3.0.5"
+    "path": "^0.12.7",
+    "vscode": "^1.1.37"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
-    "minimist": ">=0.2.5",
-    "minimatch": ">=3.0.5"
+    "minimatch": ">=3.0.5",
+    "minimist": ">=0.2.5"
   },
   "main": "./extensions/compiled/extension.js"
 }
