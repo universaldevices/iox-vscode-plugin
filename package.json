@@ -133,13 +133,13 @@
     "fs": "^0.0.1-security",
     "minimatch": ">=3.0.5",
     "minimist": ">=0.2.5",
-    "path": "^0.12.7",
-    "vscode": "^1.1.37"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "minimatch": ">=3.0.5",
-    "minimist": ">=0.2.5"
+    "minimist": ">=0.2.5",
+    "vscode": "^1.1.37"
   },
   "main": "./extensions/compiled/extension.js"
 }
