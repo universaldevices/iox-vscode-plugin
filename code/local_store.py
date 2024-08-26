@@ -4,16 +4,16 @@
 Plugin schema processor and validator
 Copyright (C) 2024 Universal Devices
 """
-from ioxplugin import StoreEntry
-from ioxplugin import Plugin
+from ioxplugin import StoreOps
+from ioxplugin import PLUGIN_LOGGER, IoXPluginLoggedException, Plugin, PluginMetaData, init_ext_logging
 import argparse
 
-
 def add_plugin():
-    project_path = "/usr/home/admin/ioxplugin/tests"
+    project_path = "/usr/home/admin/workspace/ioxplugin/tests"
+    init_ext_logging(project_path)
     json_file = f"{project_path}/dimmer.iox_plugin.json"
-    email = "n/a"
-    devUser = "n/a"
+    email = "tech@universal-devices.com"
+    devUser = "admin"
     try:
         parser = argparse.ArgumentParser(description="the path IoX Plugin json file")
     
@@ -26,17 +26,17 @@ def add_plugin():
 
         project_path = args.project_path
         json_file = args.json_file
-        email = args.email
-        devuser = args.devUser
+        email=args.email
+        devUser=args.devUser
     except SystemExit as ex:
         pass
 
     try:
+        storeOps=PluginStoreOps('Local', project_path)
         plugin=Plugin(json_file, project_path)
-        store=StoreEntry(plugin)
-        store.addToStore(email, devUser, project_path)
+        storeOps.addToStore(json_file, email, devUser)
     except Exception as ex:
-        raise
+        PLUGIN_LOGGER.error("Failed creating store entry ..", exc_info=True)
 
 if __name__ == "__main__":
     add_plugin()

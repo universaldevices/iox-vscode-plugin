@@ -1,0 +1,9 @@
+.vscode/**
+.vscode-test/**
+.gitignore
+vsc-extension-quickstart.md
+micNode.py
+node_modules/**
+docs/**
+*.vsix
+*.log

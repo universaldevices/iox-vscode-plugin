@@ -375,7 +375,7 @@ async function addPluginToStore(context: vscode.ExtensionContext, fileUri: vscod
         }
         return false;
     }
-    vscode.window.showInformationMessage('Successfully added Plugin added to local store');
+    vscode.window.showInformationMessage('Successfully added Plugin to local store');
     return true;
 }
 
@@ -388,6 +388,25 @@ async function installOnIoX(context: vscode.ExtensionContext, fileUri: vscode.Ur
           vscode.window.showErrorMessage('Cannot find project directory');
           return false;
         }
+
+        const username = await vscode.window.showInputBox({
+            prompt: 'Please enter your local PG3 username here',
+        });
+
+        if (!username) {
+          vscode.window.showErrorMessage('Need your local PG3 username to login ...');
+          return false;
+        }
+
+        const password = await vscode.window.showInputBox({
+            prompt: 'Please enter your local PG3 password here', 
+        });
+
+        if (!password) {
+          vscode.window.showErrorMessage('Need your local PG3 password to login ...');
+          return false;
+        }
+
 
         const scriptPath = path.join(context.extensionPath, 'code', 'install_on_iox.py');
 
@@ -410,7 +429,7 @@ async function installOnIoX(context: vscode.ExtensionContext, fileUri: vscode.Ur
                 vscode.window.showInformationMessage(`Python Version: ${stdout}`);
         });*/
 
-        const pythonProcess = child_process.spawn('python3', [scriptPath, workspaceFolder, fileUri.fsPath]);
+        const pythonProcess = child_process.spawn('python3', [scriptPath, workspaceFolder, username, password]);
 
         pythonProcess.stdout.on('data', (data) => {
               console.log(`${data}`);
@@ -424,12 +443,12 @@ async function installOnIoX(context: vscode.ExtensionContext, fileUri: vscode.Ur
 
         pythonProcess.on('close', (code) => {
               if (code !== 0) {
-                  console.log(`Installing on IoX exited with code ${code}`);
-                  vscode.window.showErrorMessage(`Installing on IoX exited with code ${code}`);
+                  console.log(`Installing Plugin exited with code ${code}`);
+                  vscode.window.showErrorMessage(`Installing Plugin exited with code ${code}`);
                   return false;
               } else {
-                  console.log('Plugin successfully installed on IoX');
-                  vscode.window.showInformationMessage('Plugin successfully installed on IoX ');
+                  console.log('Plugin installed successfully ');
+                  vscode.window.showInformationMessage('Plugin insalled successfully ');
                   vscode.commands.executeCommand('workbench.action.focusSideBar');
                   vscode.commands.executeCommand('workbench.view.explorer');
               }
@@ -438,15 +457,17 @@ async function installOnIoX(context: vscode.ExtensionContext, fileUri: vscode.Ur
     } catch (error: unknown) {
         if (typeof error === "object" && error !== null && "message" in error) {
             const message = (error as { message: string }).message;
-            vscode.window.showErrorMessage(`Failed installing Plugin on IoX: ${message}`);
+            vscode.window.showErrorMessage(`Failed installing Plugin : ${message}`);
         } else {
-            vscode.window.showErrorMessage(`Failed installing Plugin on IoX due to unknown error`);
+            vscode.window.showErrorMessage(`Failed installing Plugin to the local store due to unknown error`);
         }
         return false;
     }
-    vscode.window.showInformationMessage('Successfully installed Plugin on IoX');
+    vscode.window.showInformationMessage('Successfully installing Plugin');
     return true;
 }
+
+
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -476,6 +497,12 @@ export function activate(context: vscode.ExtensionContext) {
 
   let addToStore = vscode.commands.registerCommand('iox-plugin-ext.addToStore', async (fileUri: vscode.Uri)  => {
     let prc = await addPluginToStore(context, fileUri);
+    if (prc.valueOf())
+        context.subscriptions.push(addToStore);
+  });
+
+  let installPlugin = vscode.commands.registerCommand('iox-plugin-ext.installPlugin', async (fileUri: vscode.Uri)  => {
+    let prc = await installOnIoX(context, fileUri);
     if (prc.valueOf())
         context.subscriptions.push(addToStore);
   });
