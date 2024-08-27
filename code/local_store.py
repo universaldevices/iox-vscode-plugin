@@ -24,7 +24,7 @@ def add_plugin():
         args = parser.parse_args()
 
         project_path = args.project_path
-        json_file = f"{project_path}/{args.json_file}"
+        json_file = args.json_file
         email=args.email
         devUser=args.devUser
         init_ext_logging(project_path)

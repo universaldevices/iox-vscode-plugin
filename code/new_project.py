@@ -1,6 +1,7 @@
 import argparse
 import shutil
 import os
+from ioxplugin import init_ext_logging
 
 
 assets=[
@@ -20,9 +21,7 @@ def create_project():
 
     vscode_path = args.vscode_path
     project_path = args.project_path
-
-    print (vscode_path)
-    print (project_path)
+    init_ext_logging(project_path)
 
     # Ensure the project path exists and if not create it 
     if not os.path.exists(project_path):

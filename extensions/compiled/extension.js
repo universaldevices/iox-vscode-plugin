@@ -484,7 +484,7 @@ function activate(context) {
         if (prc.valueOf())
             context.subscriptions.push(addToStore);
     }));
-    let installPlugin = vscode.commands.registerCommand('iox-plugin-ext.installPlugin', (fileUri) => __awaiter(this, void 0, void 0, function* () {
+    let installPlugin = vscode.commands.registerCommand('iox-plugin-ext.installOnIoX', (fileUri) => __awaiter(this, void 0, void 0, function* () {
         let prc = yield installOnIoX(context, fileUri);
         if (prc.valueOf())
             context.subscriptions.push(addToStore);

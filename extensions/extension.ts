@@ -73,6 +73,7 @@ async function checkAndInstallPythonModules() {
 
   const modules = ['ioxplugin','fastjsonschema'];  // Example modules
   modules.forEach(module => {
+    
       child_process.exec(`${pythonInterpreter} -c "import ${module}"`, (error, stdout, stderr) => {
           if (error) {
               vscode.window.showInformationMessage(`${module} is not installed. Installing...`);
@@ -511,7 +512,7 @@ export function activate(context: vscode.ExtensionContext) {
         context.subscriptions.push(addToStore);
   });
 
-  let installPlugin = vscode.commands.registerCommand('iox-plugin-ext.installPlugin', async (fileUri: vscode.Uri)  => {
+  let installPlugin = vscode.commands.registerCommand('iox-plugin-ext.installOnIoX', async (fileUri: vscode.Uri)  => {
     let prc = await installOnIoX(context, fileUri);
     if (prc.valueOf())
         context.subscriptions.push(addToStore);
