@@ -83,6 +83,16 @@ async function checkAndInstallPythonModules() {
                       vscode.window.showInformationMessage(`${module} installed successfully.`);
                   }
               });
+          }else{
+              vscode.window.showInformationMessage(`${module} is installed. Upgrading ...`);
+              child_process.exec(`${pythonInterpreter} install -- upgrade ${module}`, (installError, installStdout, installStderr) => {
+                  if (installError) {
+                      vscode.window.showErrorMessage(`Failed to upgrade ${module}: ${installStderr}`);
+                  } else {
+                      vscode.window.showInformationMessage(`${module} upgraded successfully.`);
+                  }
+              });
+
           }
       });
   });

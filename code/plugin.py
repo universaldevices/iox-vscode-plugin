@@ -19,7 +19,7 @@ def generate_code():
         args = parser.parse_args()
 
         project_path = args.project_path
-        json_file = args.json_file
+        json_file = f"{project_path}/{args.json_file}"
     except SystemExit as ex:
         pass
 

@@ -3,7 +3,7 @@
 Plugin schema processor and validator
 Copyright (C) 2024 Universal Devices
 """
-from ioxplugin import StoreOps
+from ioxplugin import PluginStoreOps
 from ioxplugin import PLUGIN_LOGGER, IoXPluginLoggedException, Plugin, PluginMetaData, init_ext_logging
 import argparse
 
@@ -23,12 +23,13 @@ def install_plugin():
         project_path=args.project_path
         username = args.username
         password = args.password
+        init_ext_logging(project_path)
     except SystemExit as ex:
         pass
 
     try:
         storeOps=PluginStoreOps('Local', project_path)
-        storeOps.install('admin','admin')
+        storeOps.install(username, password)
     except Exception as ex:
         PLUGIN_LOGGER.error("Failed installing the plugin..", exc_info=True)
 
