@@ -38,38 +38,28 @@
     ],
     "commands": [
       {
-        "command": "iox-plugin-ext.createProject",
-        "title": "1. Create IoX Plugin Project",
+        "command": "A. iox-plugin-ext.createProject",
+        "title": "Create IoX Plugin Project",
         "icon": "add.svg"
       },
       {
-        "command": "iox-plugin-ext.createJSON",
-        "title": "2. Create IoX Plugin JSON File",
-        "icon": "json.svg"
-      },
-      {
         "command": "iox-plugin-ext.generatePluginCode",
-        "title": "3. Generate IoX Plugin Code",
+        "title": "B. Generate IoX Plugin Code",
         "icon": "file-code.svg"
       },
       {
         "command": "iox-plugin-ext.addToStore",
-        "title": "4. Add to local plugin store",
+        "title": "C. Add to Store & Install on IoX",
         "icon": "repo-push.svg"
       },
       {
-        "command": "iox-plugin-ext.installOnIoX",
-        "title": "5. Install on IoX",
-        "icon": "folder-active.svg"
-      },
-      {
         "command": "iox-plugin-ext.runInIoX",
-        "title": "6. Run in IoX",
+        "title": "D. Run in IoX",
         "icon": "run-above.svg"
       },
       {
         "command": "iox-plugin-ext.packageAndPublish",
-        "title": "7. Package and Publish",
+        "title": "Package and Publish",
         "icon": "package.svg"
       },
       {
@@ -89,6 +79,26 @@
         {
           "when": "resourceFilename =~ /\\.iox_plugin\\.json$/",
           "command": "iox-plugin-ext.generatePluginCode",
+          "group": "navigation",
+          "arguments": [
+            {
+              "uri": "${selectedFile}"
+            }
+          ]
+        },
+        {
+          "when": "resourceFilename =~ /\\.iox_plugin\\.json$/",
+          "command": "iox-plugin-ext.addToStore",
+          "group": "navigation",
+          "arguments": [
+            {
+              "uri": "${selectedFile}"
+            }
+          ]
+        },
+        {
+          "when": "resourceFilename =~ /\\.iox_plugin\\.json$/",
+          "command": "iox-plugin-ext.runInIoX",
           "group": "navigation",
           "arguments": [
             {

@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as child_process from 'child_process';
 
+
 class CommandItem extends vscode.TreeItem {
     constructor(
         public readonly label: string,
@@ -99,6 +100,36 @@ async function checkAndInstallPythonModules() {
   });
 }
 
+function saveSnippet(workspace_folder:string, snippet_path: string, select:boolean)
+{
+    /*const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (workspaceFolders) {
+        */
+        const destinationPath = path.join(workspace_folder, path.basename(snippet_path));
+        console.log(destinationPath);
+        console.log(snippet_path);
+        fs.copyFileSync(snippet_path, destinationPath);
+        vscode.window.showInformationMessage(`Template copied to ${destinationPath}`);
+        if (select)
+        {
+            vscode.commands.executeCommand('workbench.action.focusSideBar');
+            vscode.commands.executeCommand('workbench.view.explorer');
+        }
+        return true;
+   /* }
+    return false*/
+}
+
+async function onClose(context: vscode.ExtensionContext, workspaceFolder: string, snippet_path:string|null) 
+{
+    if (snippet_path)
+    {
+        saveSnippet(workspaceFolder, snippet_path, false)
+    }
+    const uri = vscode.Uri.file(workspaceFolder);
+    await vscode.commands.executeCommand('vscode.openFolder', uri, false);
+}
+
 async function createNewIoXPluginProject(context: vscode.ExtensionContext) 
 {
     try {
@@ -111,6 +142,9 @@ async function createNewIoXPluginProject(context: vscode.ExtensionContext)
           vscode.window.showErrorMessage('Project creation cancelled.');
           return false;
         }
+
+        const snippet_path =await createJSON(context, workspaceFolder, false);
+       
         const scriptPath = path.join(context.extensionPath, 'code', 'new_project.py');
 
         const pythonProcess = child_process.spawn('python3', [scriptPath, workspaceFolder, context.extensionPath]);
@@ -131,10 +165,7 @@ async function createNewIoXPluginProject(context: vscode.ExtensionContext)
                   vscode.window.showErrorMessage(`${code}`);
                   return false;
               } else {
-                  console.log('Generating IoX Plugin project completed successfully');
-                  vscode.window.showInformationMessage('Generating IoX Plugin project completed successfully');
-                  const uri = vscode.Uri.file(workspaceFolder);
-                  vscode.commands.executeCommand('vscode.openFolder', uri, false);
+                  onClose(context, workspaceFolder, snippet_path)
               }
         });
 
@@ -151,7 +182,8 @@ async function createNewIoXPluginProject(context: vscode.ExtensionContext)
     return true;
 }
 
-async function createJSON(context: vscode.ExtensionContext) 
+
+async function createJSON(context: vscode.ExtensionContext, destPath:string, save:boolean=true) 
 {
     try {
         const packageJsonPath = path.join(context.extensionPath, 'package.json');
@@ -175,15 +207,13 @@ async function createJSON(context: vscode.ExtensionContext)
         });
 
         if (pickedSnippet) {
-            const workspaceFolders = vscode.workspace.workspaceFolders;
-            if (workspaceFolders) {
-                const destinationPath = path.join(workspaceFolders[0].uri.fsPath, path.basename(pickedSnippet.fullPath));
-                fs.copyFileSync(pickedSnippet.fullPath, destinationPath);
-                vscode.window.showInformationMessage(`Template copied to ${destinationPath}`);
-                vscode.commands.executeCommand('workbench.action.focusSideBar');
-                vscode.commands.executeCommand('workbench.view.explorer');
+            if (save)
+            {
+                saveSnippet(destPath, pickedSnippet.fullPath, true);
             }
+            return pickedSnippet.fullPath;
         }
+        return null;
     } catch (error: unknown) {
         if (typeof error === "object" && error !== null && "message" in error) {
             const message = (error as { message: string }).message;
@@ -191,9 +221,8 @@ async function createJSON(context: vscode.ExtensionContext)
         } else {
             vscode.window.showErrorMessage(`Failed to copy template due to an unknown error`);
         }
-        return false;
+        return null ;
     }
-    return true;
 }
 
 async function getPluginJSONFile(context: vscode.ExtensionContext):Promise<vscode.Uri | null>
@@ -211,7 +240,7 @@ async function getPluginJSONFile(context: vscode.ExtensionContext):Promise<vscod
 
         if (files.length === 0) {
             vscode.window.showErrorMessage("You don't have any IoX Plugin JSON Files. Let's create one!");
-            createJSON(context)
+            createJSON(context, workspaceFolder, true)
         } else {
             const items = files.map(file => ({
                 detail: file.fsPath,
@@ -312,6 +341,10 @@ async function addPluginToStore(context: vscode.ExtensionContext, fileUri: vscod
           return false;
         }
 
+        let workspaceFolder_uri = null;
+        if (vscode.workspace.workspaceFolders)
+            workspaceFolder_uri = vscode.workspace.workspaceFolders[0].uri;
+
         const email = await vscode.window.showInputBox({
             prompt: 'Please enter your developer account email address',
         });
@@ -374,6 +407,7 @@ async function addPluginToStore(context: vscode.ExtensionContext, fileUri: vscod
                   vscode.window.showInformationMessage('Plugin added successfully to the local store');
                   vscode.commands.executeCommand('workbench.action.focusSideBar');
                   vscode.commands.executeCommand('workbench.view.explorer');
+                  installOnIoX(context, workspaceFolder_uri )
               }
         });
 
@@ -495,9 +529,13 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   let create_JSON = vscode.commands.registerCommand('iox-plugin-ext.createJSON', async (fileUri: vscode.Uri)  => {
-    let prc = await createJSON(context);
-    if (prc.valueOf())
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (workspaceFolders)
+    {
+        let prc = await createJSON(context, workspaceFolders[0].uri.fsPath  ,true);
+        if (prc)
         context.subscriptions.push(create_JSON);
+    }
   });
 
   let generateCode = vscode.commands.registerCommand('iox-plugin-ext.generatePluginCode', async (fileUri: vscode.Uri)  => {

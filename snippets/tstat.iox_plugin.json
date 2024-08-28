@@ -2,7 +2,7 @@
     "plugin": {
           "name":"tstat",
           "description":"A Thermostat",
-          "author":"UD",
+          "publisher":"UD",
           "language": 0,
           "executableName":"tstat.py",
           "installScript":"install.sh",

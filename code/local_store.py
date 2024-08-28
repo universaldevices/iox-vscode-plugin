@@ -28,12 +28,15 @@ def add_plugin():
         email=args.email
         devUser=args.devUser
         init_ext_logging(project_path)
+
     except SystemExit as ex:
         pass
 
     try:
         storeOps=PluginStoreOps('Local', project_path)
-        storeOps.addToStore(json_file, email, devUser)
+        if not storeOps.addToStore(json_file, email, devUser):
+            PLUGIN_LOGGER.error("failed adding to local store", exec_info=True)
+            exit(1)
     except Exception as ex:
         PLUGIN_LOGGER.error("Failed creating store entry ..", exc_info=True)
 
