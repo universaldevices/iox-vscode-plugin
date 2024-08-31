@@ -38,8 +38,8 @@
     ],
     "commands": [
       {
-        "command": "A. iox-plugin-ext.createProject",
-        "title": "Create IoX Plugin Project",
+        "command": "iox-plugin-ext.createProject",
+        "title": "A. Create IoX Plugin Project",
         "icon": "add.svg"
       },
       {
@@ -51,11 +51,6 @@
         "command": "iox-plugin-ext.addToStore",
         "title": "C. Add to Store & Install on IoX",
         "icon": "repo-push.svg"
-      },
-      {
-        "command": "iox-plugin-ext.runInIoX",
-        "title": "D. Run in IoX",
-        "icon": "run-above.svg"
       },
       {
         "command": "iox-plugin-ext.packageAndPublish",

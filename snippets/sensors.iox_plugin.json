@@ -11,7 +11,7 @@
           "shortPoll":60,
           "longPoll":600,
           "profileVersion":"3.0.0",
-          "initialLogLevel":"INFO",
+          "initialLogLevel":"DEBUG",
           "enableOAUTH2":false,
           "worksOnPolisy":true,
           "worksOnEisy":true,
