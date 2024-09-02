@@ -15,6 +15,14 @@
             "justMyCode": false
         },
         {
+            "name": "Python Debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
             "name": "Extension",
             "type": "extensionHost",
             "request": "launch",
