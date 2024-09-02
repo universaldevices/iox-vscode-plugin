@@ -5,18 +5,14 @@
   "publisher": "UniversalDevices",
   "icon": "images/icon.png",
   "repository": "https://github.com/universaldevices/iox-vscode-plugin",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "engines": {
     "vscode": "^1.85.1"
   },
-  "extensionDependencies": [
-    "ms-python.python",
-    "ms-python.debugpy",
-    "vscodevim.vim"
-  ],
   "categories": [
     "Programming Languages"
   ],
+  "enabledAPIProposals": false,
   "contributes": {
     "viewsContainers": {
       "activitybar": [
@@ -89,16 +85,6 @@
         {
           "when": "resourceFilename =~ /\\.iox_plugin\\.json$/",
           "command": "iox-plugin-ext.addToStore",
-          "group": "navigation",
-          "arguments": [
-            {
-              "uri": "${selectedFile}"
-            }
-          ]
-        },
-        {
-          "when": "resourceFilename =~ /\\.iox_plugin\\.json$/",
-          "command": "iox-plugin-ext.runInIoX",
           "group": "navigation",
           "arguments": [
             {

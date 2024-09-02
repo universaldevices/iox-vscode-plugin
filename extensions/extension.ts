@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as child_process from 'child_process';
+import { exec } from 'child_process';
 
 
 class CommandItem extends vscode.TreeItem {
@@ -69,12 +70,59 @@ function createCommandPanel(context: vscode.ExtensionContext){
     );*/
 }
 
-async function checkAndInstallPythonModules() {
+async function checkAndInstallDependencies_shell(context:vscode.ExtensionContext) {
+    try {
+        if (!vscode.workspace.workspaceFolders) {
+            vscode.window.showErrorMessage('No open workspace. Please open a directory first.');
+            return null ;
+        }
+
+        const workspaceFolder = vscode.workspace.workspaceFolders[0].uri.fsPath;
+
+        const scriptPath = path.join(context.extensionPath, 'code', 'install_deps.sh');
+
+         // Run the shell script
+        exec(`bash ${scriptPath}`, (error, stdout, stderr) => {
+            if (error) {
+                vscode.window.showErrorMessage(`Error: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                vscode.window.showErrorMessage(`Error: ${stderr}`);
+                return;
+            }
+            vscode.window.showInformationMessage(`Output: ${stdout}`);
+        });
+
+    } catch (error: unknown) {
+        if (typeof error === "object" && error !== null && "message" in error) {
+            const message = (error as { message: string }).message;
+            vscode.window.showErrorMessage(`Failed to add dependencies: ${message}`);
+        } else {
+            vscode.window.showErrorMessage("Failed to add dependencies");
+        }
+        return false;
+    }
+    vscode.window.showInformationMessage('Successfully added dependencies');
+    return true;
+
+}
+
+async function checkAndInstallDependencies(context:vscode.ExtensionContext) {
   const pythonInterpreter = vscode.workspace.getConfiguration('python3').get<string>('pythonPath', 'pip3');
 
   const modules = ['ioxplugin','fastjsonschema'];  // Example modules
   modules.forEach(module => {
-    
+    vscode.window.showInformationMessage(`installing/upgrading ${module} ...`);
+    child_process.exec(`${pythonInterpreter} install --upgrade ${module}`, (installError, installStdout, installStderr) => {
+        if (installError) {
+            vscode.window.showErrorMessage(`Failed to install/upgrade ${module}: ${installStderr}`);
+        } else {
+            vscode.window.showInformationMessage(`${module} installed/upgraded successfully.`);
+        }
+    });
+
+/*    
       child_process.exec(`${pythonInterpreter} -c "import ${module}"`, (error, stdout, stderr) => {
           if (error) {
               vscode.window.showInformationMessage(`${module} is not installed. Installing...`);
@@ -87,7 +135,7 @@ async function checkAndInstallPythonModules() {
               });
           }else{
               vscode.window.showInformationMessage(`${module} is installed. Upgrading ...`);
-              child_process.exec(`${pythonInterpreter} install -- upgrade ${module}`, (installError, installStdout, installStderr) => {
+              child_process.exec(`${pythonInterpreter} install --upgrade ${module}`, (installError, installStdout, installStderr) => {
                   if (installError) {
                       vscode.window.showErrorMessage(`Failed to upgrade ${module}: ${installStderr}`);
                   } else {
@@ -96,7 +144,7 @@ async function checkAndInstallPythonModules() {
               });
 
           }
-      });
+      });*/
   });
 }
 
@@ -516,11 +564,11 @@ async function installOnIoX(context: vscode.ExtensionContext, fileUri: vscode.Ur
 
 export function activate(context: vscode.ExtensionContext) {
 
-  let python_dep = vscode.commands.registerCommand('iox-plugin-ext.ensurePythonDependencies', async () => {
-    checkAndInstallPythonModules();
+  let python_dep = vscode.commands.registerCommand('iox-plugin-ext.ensureDependencies', async () => {
+   checkAndInstallDependencies(context);
   });
   context.subscriptions.push(python_dep);
-  checkAndInstallPythonModules();
+  checkAndInstallDependencies(context);
 
   let createProject = vscode.commands.registerCommand('iox-plugin-ext.createProject', async () => {
     let prc = await createNewIoXPluginProject(context);
