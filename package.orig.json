@@ -5,7 +5,7 @@
   "publisher": "UniversalDevices",
   "icon": "images/icon.png",
   "repository": "https://github.com/universaldevices/iox-vscode-plugin",
-  "version": "1.6.7",
+  "version": "1.6.3",
   "engines": {
     "vscode": "^1.85.1"
   },
@@ -40,27 +40,27 @@
     "commands": [
       {
         "command": "iox-plugin-ext.createProject",
-        "title": "IoX|Create a New Plugin Project",
+        "title": "A. Create IoX Plugin Project",
         "icon": "add.svg"
       },
       {
         "command": "iox-plugin-ext.generatePluginCode",
-        "title": "IoX|Generate IoX Plugin Code (Step 2)",
+        "title": "B. Generate IoX Plugin Code",
         "icon": "file-code.svg"
       },
       {
         "command": "iox-plugin-ext.addToStore",
-        "title": "IoX|Add to Store & Install on IoX Step 3)",
+        "title": "C. Add to Store & Install on IoX",
         "icon": "repo-push.svg"
       },
       {
         "command": "iox-plugin-ext.packageAndPublish",
-        "title": "IoX|Package and Publish",
+        "title": "Package and Publish",
         "icon": "package.svg"
       },
       {
         "command": "iox-plugin-ext.generateHelp",
-        "title": "IoX|Help",
+        "title": "Help",
         "icon": "question.svg"
       }
     ],
@@ -133,7 +133,8 @@
     "@types/node": "^20.12.7",
     "minimatch": ">=3.0.5",
     "minimist": ">=0.2.5",
-    "vscode": "^1.1.34"
+    "vscode": "^1.1.34",
+    "@vscode/vsce": "^2.16.0"
   },
   "main": "./extensions/compiled/extension.js"
 }
