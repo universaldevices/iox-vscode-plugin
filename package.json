@@ -64,6 +64,13 @@
         "icon": "question.svg"
       }
     ],
+    "activationEvents": [
+      "onCommand:iox-plugin-ext.createProject",
+      "onCommand:iox-plugin-ext.generatePluginCode",
+      "onCommand:iox-plugin-ext.attToStore",
+      "onCommand:iox-plugin-ext.packageAndPublish",
+      "onCommand:iox-plugin-ext.generateHelp"
+    ],
     "menus": {
       "commandPalette": [
         {
