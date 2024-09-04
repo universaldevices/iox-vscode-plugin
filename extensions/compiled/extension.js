@@ -523,7 +523,6 @@ function installOnIoX(context, fileUri) {
             }
             return false;
         }
-        vscode.window.showInformationMessage('Successfully installing Plugin');
         return true;
     });
 }

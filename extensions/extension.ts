@@ -556,7 +556,6 @@ async function installOnIoX(context: vscode.ExtensionContext, fileUri: vscode.Ur
         }
         return false;
     }
-    vscode.window.showInformationMessage('Successfully installing Plugin');
     return true;
 }
 
