@@ -5,7 +5,7 @@
   "publisher": "UniversalDevices",
   "icon": "images/icon.png",
   "repository": "https://github.com/universaldevices/iox-vscode-plugin",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "engines": {
     "vscode": "^1.85.1"
   },
@@ -40,22 +40,26 @@
     "commands": [
       {
         "command": "iox-plugin-ext.createProject",
-        "title": "IoX|Create a New Plugin Project",
+        "shortTitle": "This is the first step in your endeavors!",
+        "title": "IoX-1|Create a New Plugin Project",
         "icon": "add.svg"
       },
       {
         "command": "iox-plugin-ext.generatePluginCode",
-        "title": "IoX|Generate IoX Plugin Code (Step 2)",
+        "title": "IoX-2|Generate IoX Plugin Code",
+        "shortTitle": "This will automatically generate code from the json file. It can be repeated as many times as you like.",
         "icon": "file-code.svg"
       },
       {
         "command": "iox-plugin-ext.addToStore",
-        "title": "IoX|Add to Store & Install on IoX Step 3)",
+        "title": "IoX-3|Add to Store & Install",
+        "shortTitle": "This will add your plugin to the local store and then installs it on IoX. You can then run direclty in vscode.",
         "icon": "repo-push.svg"
       },
       {
         "command": "iox-plugin-ext.packageAndPublish",
-        "title": "IoX|Package and Publish",
+        "title": "IoX-4|Package and Publish",
+        "shortTitle": "Package your plugin and publish to the production store!",
         "icon": "package.svg"
       },
       {
