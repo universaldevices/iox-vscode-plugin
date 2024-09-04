@@ -24,8 +24,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
-        run: npm i
-        run: npm install @vscode/vsce
+        run: |
+            npm i
+            npm install @vscode/vsce
 
       - name: Setup package path
         id: setup
