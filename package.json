@@ -139,8 +139,7 @@
   "devDependencies": {
     "@types/node": "^20.12.7",
     "minimatch": ">=3.0.5",
-    "minimist": ">=0.2.5",
-    "@vscode/vsce": "^2.8.0"
+    "minimist": ">=0.2.5"
   },
   "main": "./extensions/compiled/extension.js"
 }
