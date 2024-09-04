@@ -25,8 +25,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-            npm install @vscode/vsce
             npm i
+            npm i @vscode/vsce
 
       - name: Setup package path
         id: setup
