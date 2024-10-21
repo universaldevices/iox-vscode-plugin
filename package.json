@@ -4,8 +4,11 @@
   "description": "Define your plugin in JSON and let this extension take care of the rest",
   "publisher": "UniversalDevices",
   "icon": "images/icon.png",
-  "repository": "https://github.com/universaldevices/iox-vscode-plugin",
-  "version": "1.8.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/universaldevices/iox-vscode-plugin"
+  },
+  "version": "1.8.2",
   "engines": {
     "vscode": "^1.85.1"
   },

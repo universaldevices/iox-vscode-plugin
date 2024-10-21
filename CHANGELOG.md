@@ -4,7 +4,7 @@ All notable changes to the "iox-plugin-ext" extension will be documented in this
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [1.8.0] - 2024-10-21
+## [1.8.2] - 2024-10-21
 
 - Initial production release 
 
