@@ -73,5 +73,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: ${{ needs.package.outputs.packageName }}
+      - run: node --version  
       - name: Publish to Open VSX
         run: npx ovsx publish ./${{ needs.package.outputs.packageName }} -p ${{ secrets.OVSX_PAT }}
