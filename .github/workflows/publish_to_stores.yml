@@ -31,7 +31,10 @@ jobs:
 
       - name: Setup package path
         id: setup
-        run: echo "::set-output name=packageName::$(node -e "console.log(require('./package.json').name + '-' + require('./package.json').version + '.vsix')")"
+        #the following is deprecated
+        #run: echo "::set-output name=packageName::$(node -e "console.log(require('./package.json').name + '-' + require('./package.json').version + '.vsix')")"
+        ##
+        run: echo "{packageName}={$(node -e "console.log(require('./package.json').name + '-' + require('./package.json').version + '.vsix')")"} >> $GITHUB_OUTPUT
 
       - name: Package
         run: |
