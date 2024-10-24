@@ -138,6 +138,11 @@
             "default":false,
             "description": "Whether or not this plugin can directly communiate with IoX. If you choose true, the customer must explicitly accept"
           },
+          "enableDiscovery":{
+            "type":"boolean",
+            "default":"false",
+            "description": "Whether or not the plugin requires mdns discovery services"
+          },
           "requirements":{
             "type":"array",
             "description": "pip packages to be installed. udi_interface and ioxplugin are installed by default.",
