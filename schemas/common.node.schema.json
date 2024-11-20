@@ -20,8 +20,18 @@
           "propertyOrder":3
         },
         "icon":{
-          "type": "string",
-          "$ref": "icon.schema.json",
+          "oneOf":
+          [
+            {
+              "type": "string",
+              "$ref": "icon.schema.json"
+            },
+            {
+              "type": "string",
+              "format": "uri"
+            }
+          ],
+          "description": "Either use one of the default icons or provide a uri path",
           "propertyOrder":4
         },
         "commands": {
