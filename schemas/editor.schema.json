@@ -35,7 +35,7 @@
                         "description": "Maximum value (mandatory)"
                     },
                     "step":{
-                        "type":"integer",
+                        "type":"number",
                         "description" : "The number of increments with each step. In case you have precision, this is mandatory"
                     },
                     "precision":{
