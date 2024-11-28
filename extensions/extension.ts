@@ -111,7 +111,7 @@ async function checkAndInstallDependencies_shell(context:vscode.ExtensionContext
 async function checkAndInstallDependencies(context:vscode.ExtensionContext) {
   const pythonInterpreter = vscode.workspace.getConfiguration('python3').get<string>('pythonPath', 'pip3');
 
-  const modules = ['ioxplugin','fastjsonschema'];  // Example modules
+  const modules = ['ioxplugin'];  // Example modules
   modules.forEach(module => {
     vscode.window.showInformationMessage(`installing/upgrading ${module} ...`);
     child_process.exec(`${pythonInterpreter} install --upgrade ${module}`, (installError, installStdout, installStderr) => {
