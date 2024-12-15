@@ -27,6 +27,12 @@
             "uom": "Percent | 51"
         },
         {
+            "id": "onlevel",
+            "min": 0,
+            "max": 100,
+            "uom": "Percent | 51"
+        },
+        {
             "id": "ramprate",
             "min": 0,
             "max": 600,

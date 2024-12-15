@@ -24,7 +24,7 @@
                     },
                     "uom":{
                         "$ref": "uom.schema.json",
-                        "description": "Each UOM has its own unique identifier."
+                        "description":"Each UOM has its own unique id. If you want multiple UOM in one editor (say F and C), just make the ids of the editors to be the same. But, each must have a different UOM"
                     },
                     "min":{
                         "type":"integer",
