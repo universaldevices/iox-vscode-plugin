@@ -6,12 +6,17 @@ Copyright (C) 2024 Universal Devices
 """
 from ioxplugin import Plugin, init_ext_logging, PLUGIN_LOGGER, IoXPluginLoggedException
 import argparse, venv,os, subprocess
+import shutil
+bash_path = shutil.which('bash')
 
 DOT_ENV_FILE = '.venv'
 
 def generate_code():
     project_path = "/usr/home/admin/workspace/crap1"
     json_file = f"{project_path}/sensors.iox_plugin.json"
+    if not os.path.exists(bash_path):
+        raise IoXPluginLoggedException("bash shell not found, is it installed on the system?")
+
     try:
         parser = argparse.ArgumentParser(description="the path IoX Plugin json file")
     
@@ -31,18 +36,18 @@ def generate_code():
     mod.generateCode(project_path)
     try:
         venv_path=os.path.join(project_path, DOT_ENV_FILE)
-        PLUGIN_LOGGER.info(f"creating a virtual env in {venv_path}")
+        PLUGIN_LOGGER.info(f"creating a virtual env in {venv_path}, bash path is {bash_path} ...")
         venv.create(venv_path, with_pip=True)
         script_path=os.path.join(venv_path, 'bin', 'activate')
 
         output='echo "virtual env activated ... "'
-        subprocess.run(f"source {script_path} && {output}", shell=True, executable='/usr/local/bin/bash')
+        subprocess.run(f"source {script_path} && {output}", shell=True, executable=bash_path)
 
         PLUGIN_LOGGER.info("installing requiremnets into the virtual env ...")
         script_path=os.path.join(venv_path, 'bin', 'pip3')
         requirements_path=os.path.join(project_path, 'requirements.txt')
         output='echo "requirements installed successfully ... "'
-        subprocess.run(f"{script_path} install -r {requirements_path}", shell=True, executable='/usr/local/bin/bash')
+        subprocess.run(f"{script_path} install -r {requirements_path}", shell=True, executable=bash_path)
 
 
     except Exception as ex:
