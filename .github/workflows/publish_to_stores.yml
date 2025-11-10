@@ -38,7 +38,7 @@ jobs:
 
       - name: Package
         run: |
-          npx vsce package --out ${{ steps.setup.outputs.packageName }}
+          npx  @vscode/vsce package --out ${{ steps.setup.outputs.packageName }}
 
       - uses: actions/upload-artifact@v4
         with:
@@ -65,7 +65,7 @@ jobs:
         with:
           name: ${{ needs.package.outputs.packageName }}
       - name: Publish to VS marketplace
-        run: npx vsce publish --packagePath ./${{ needs.package.outputs.packageName }} -p ${{ secrets.VSCE_PAT }}
+        run: npx  @vscode/vsce publish --packagePath ./${{ needs.package.outputs.packageName }} -p ${{ secrets.VSCE_PAT }}
 
   publishOVSX:
     name: Publish to Open VSX
