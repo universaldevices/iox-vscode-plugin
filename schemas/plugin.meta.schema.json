@@ -143,6 +143,29 @@
             "default":"false",
             "description": "Whether or not the plugin requires mdns discovery services"
           },
+          "customParams":{
+            "type":"object",
+            "description":"A JSON formatted string with a list of custom parameters that can be set by customer. Do NOT include anything that requires security/privacy. For those, set them directly in the store."
+          },
+          "oauthParms":{
+            "type":"object",
+            "description":"A JSON formatted string for OAuth configuration. Do NOT include unless PUBLICLY available information. For private/security configuration. set them directly in the store" 
+          },
+          "hardwareConfig":{
+            "description": "Filename that includes instructions for setting up hardware permission. See sample_hw.conf file in your project directory.",
+            "type": "object",
+              "properties": {
+                "filename": {
+                  "type": "string"
+                }
+              },
+              "required": ["filename"],
+              "additionalProperties": false
+          },
+          "customData":{
+            "type":"string",
+            "description":"Any free form text/data you need in your plugin. Do NOT include anything that requires privacy/security" 
+          },
           "requirements":{
             "type":"array",
             "description": "pip packages to be installed. udi_interface and ioxplugin are installed by default.",

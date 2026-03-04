@@ -7,7 +7,8 @@ from ioxplugin import init_ext_logging, PLUGIN_LOGGER, IoXPluginLoggedException
 assets=[
     'install.sh',
     'tar.it',
-    'POLYGLOT_CONFIG.md'
+    'POLYGLOT_CONFIG.md',
+    'sample_hw.conf'
 ]
 def create_project():
     parser = argparse.ArgumentParser(description="the path IoX plugin files")
