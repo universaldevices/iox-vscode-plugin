@@ -138,14 +138,14 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
-    "minimatch": ">=10.2.1",
+    "minimatch": ">=10.2.3",
     "minimist": ">=0.2.5",
     "path": "^0.12.7",
     "upgrade": "^1.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
-    "minimatch": ">=10.2.1",
+    "minimatch": ">=10.2.3",
     "minimist": ">=0.2.5",
     "@types/vscode": "^1.1.37"
   },
