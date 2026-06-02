@@ -37,7 +37,7 @@ def generate_code():
     try:
         venv_path=os.path.join(project_path, DOT_ENV_FILE)
         PLUGIN_LOGGER.info(f"creating a virtual env in {venv_path}, bash path is {bash_path} ...")
-        venv.create(venv_path, with_pip=True, clear=True) #use clear so that the plugin does not fail if the venv already exists
+        venv.create(venv_path, with_pip=True, clear=True, system_site_packages=True) #use clear so that the plugin does not fail if the venv already exists
         script_path=os.path.join(venv_path, 'bin', 'activate')
 
         output='echo "virtual env activated ... "'

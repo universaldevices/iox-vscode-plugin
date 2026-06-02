@@ -1,3 +1,4 @@
 node_modules/*
 logs/*
 .venv/*
+__pycache__/
